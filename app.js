@@ -67,7 +67,7 @@ function getRemainingTime() {
 
     if(t < 0) {
         clearInterval(countdown);
-        deadline.innerHTML = `<h4 class="expired">the lockdown is over</h4>`;
+        deadline.innerHTML = `<h4 class="">the lockdown is over</h4>`;
     }
 }
 let countdown = setInterval(getRemainingTime, 1000);
