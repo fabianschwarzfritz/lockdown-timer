@@ -31,7 +31,7 @@ function format(item) {
 
 const giveaway = document.querySelector(".lockdown");
 const deadline = document.querySelector(".deadline");
-const items = document.querySelectorAll(".deadline-format h4");
+const items = document.querySelectorAll(".deadline h4");
 
 let futureDate = new Date(2020, 11, 1);
 
@@ -42,7 +42,7 @@ const weekday = weekdays[futureDate.getDay()];
 const hours = format(futureDate.getHours());
 const minutes = format(futureDate.getMinutes());
 const seconds = format(futureDate.getSeconds());
-giveaway.textContent = `lockdown ends on ${weekday} ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`
+giveaway.textContent = `Lockdown ends on ${weekday} ${date} ${month} ${year} ${hours}:${minutes}:${seconds}.`
 
 const futureTime = futureDate.getTime();
 
