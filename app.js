@@ -22,6 +22,12 @@ const weekdays = [
     "Friday",
     "Saturday",
 ]
+function format(item) {
+    if(item < 10) {
+        return `0${item}`;
+    }
+    return item;
+}
 
 const giveaway = document.querySelector(".lockdown");
 const deadline = document.querySelector(".deadline");
@@ -33,9 +39,9 @@ const year = futureDate.getFullYear();
 const month = months[futureDate.getMonth()];
 const date = futureDate.getDate();
 const weekday = weekdays[futureDate.getDay()];
-const hours = futureDate.getHours();
-const minutes = futureDate.getMinutes();
-const seconds = futureDate.getSeconds();
+const hours = format(futureDate.getHours());
+const minutes = format(futureDate.getMinutes());
+const seconds = format(futureDate.getSeconds());
 giveaway.textContent = `lockdown ends on ${weekday} ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`
 
 const futureTime = futureDate.getTime();
@@ -53,12 +59,6 @@ function getRemainingTime() {
     const minutes = Math.floor((t % oneHour) / oneMinute);
     const seconds = Math.floor((t % oneMinute) / oneSecond);
 
-    function format(item) {
-        if(item < 10) {
-            return `0${item}`;
-        }
-        return item;
-    }
 
     const values = [days, hours, minutes, seconds];
     items.forEach(function(item, index) {
