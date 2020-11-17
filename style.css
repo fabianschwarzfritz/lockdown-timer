@@ -3,6 +3,10 @@ img {
     max-height: 100%;
 }
 
+section {
+    margin-top: 30px;
+}
+
 article {
     width: 600px;
     margin-left: auto;
