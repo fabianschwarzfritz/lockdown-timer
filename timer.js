@@ -59,7 +59,7 @@ class Timer extends HTMLElement {
 
         if(t < 0) {
             clearInterval(this.interval);
-            deadline.innerHTML = `<h4 class="">it's over!</h4>`;
+            this.deadline.innerHTML = `<h4 class="">it's over!</h4>`;
         }
 
         const oneSecond = 1000;
@@ -78,9 +78,17 @@ class Timer extends HTMLElement {
         this.renderTime("seconds", seconds);
     }
 
+    readDeadline() {
+        const configuredDate = this.getAttribute("deadline");
+        if(configuredDate) {
+            return new Date(configuredDate);
+        }
+        return new Date(2020, 11, 1);
+    }
+
     connectedCallback() {
         // TODO make the future date configurable
-        let futureDate = new Date(2020, 11, 1);
+        const futureDate = this.readDeadline();
         const that = this;
         this.interval = setInterval(() => {
             that.calculateTime(futureDate.getTime());
