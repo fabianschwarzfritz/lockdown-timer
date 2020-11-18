@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <script type="module" src="timer.js"></script>
         <section class="section-center">
             <article class="lockdown-img">
                 <img src="./lockdown.jpeg" alt="lockdown picture" />
@@ -19,24 +20,7 @@ lockdown ends on 1st of December 2020.
                 <p>
 See how many days you have to focus on staying at home :)
                 </p>
-                <div class="deadline">
-                    <div>
-                        <h4 class="days">34</h4>
-                        <span>days</span>
-                    </div>
-                    <div>
-                        <h4 class="hours">34</h4>
-                        <span>hours</span>
-                    </div>
-                    <div>
-                        <h4 class="minutes">34</h4>
-                        <span>minutes</span>
-                    </div>
-                    <div>
-                        <h4 class="seconds">34</h4>
-                        <span>seconds</span>
-                    </div>
-                </div>
+                <corona-timer></corona-timer>
             </article>
         </section>
         <script src="app.js"></script>

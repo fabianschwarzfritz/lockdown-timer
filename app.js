@@ -44,31 +44,3 @@ const minutes = format(futureDate.getMinutes());
 const seconds = format(futureDate.getSeconds());
 giveaway.textContent = `Lockdown ends on ${weekday} ${date} ${month} ${year} ${hours}:${minutes}:${seconds}.`
 
-const futureTime = futureDate.getTime();
-
-function getRemainingTime() {
-    const today = new Date().getTime();
-    const t = futureTime - today;
-    const oneSecond = 1000;
-    const oneMinute = 60 * oneSecond;
-    const oneHour = 60 * oneMinute;
-    const oneDay = 24 * oneHour;
-
-    const days = Math.floor(t/oneDay);
-    const hours = Math.floor((t % oneDay) / oneHour);
-    const minutes = Math.floor((t % oneHour) / oneMinute);
-    const seconds = Math.floor((t % oneMinute) / oneSecond);
-
-
-    const values = [days, hours, minutes, seconds];
-    items.forEach(function(item, index) {
-        item.innerHTML = format(values[index]);
-    });
-
-    if(t < 0) {
-        clearInterval(countdown);
-        deadline.innerHTML = `<h4 class="">the lockdown is over</h4>`;
-    }
-}
-let countdown = setInterval(getRemainingTime, 1000);
-getRemainingTime();
