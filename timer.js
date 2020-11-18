@@ -56,6 +56,12 @@ class Timer extends HTMLElement {
     calculateTime(futureTime) {
         const today = new Date().getTime();
         const t = futureTime - today;
+
+        if(t < 0) {
+            clearInterval(this.interval);
+            deadline.innerHTML = `<h4 class="">it's over!</h4>`;
+        }
+
         const oneSecond = 1000;
         const oneMinute = 60 * oneSecond;
         const oneHour = 60 * oneMinute;
@@ -76,7 +82,7 @@ class Timer extends HTMLElement {
         // TODO make the future date configurable
         let futureDate = new Date(2020, 11, 1);
         const that = this;
-        setInterval(() => {
+        this.interval = setInterval(() => {
             that.calculateTime(futureDate.getTime());
         }, 1000);
         that.calculateTime(futureDate.getTime());
