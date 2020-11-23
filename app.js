@@ -33,7 +33,7 @@ const giveaway = document.querySelector(".lockdown");
 const deadline = document.querySelector(".deadline");
 const items = document.querySelectorAll(".deadline h4");
 
-let futureDate = new Date(2020, 11, 1);
+let futureDate = new Date(2020, 11, 20);
 
 const year = futureDate.getFullYear();
 const month = months[futureDate.getMonth()];
