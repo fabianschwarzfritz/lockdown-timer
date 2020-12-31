@@ -29,7 +29,7 @@ class Timer extends HTMLElement {
         this.deadline = document.createElement('div');
         this.deadline.setAttribute("class", classname);
         this.shadowRoot.appendChild(this.deadline);
-        return deadline;
+        return this.deadline;
     }
     create(classname) {
         const heading = document.createElement('h4');
@@ -83,7 +83,7 @@ class Timer extends HTMLElement {
         if(configuredDate) {
             return new Date(configuredDate);
         }
-        return new Date(2020, 11, 1);
+        return new Date();
     }
 
     connectedCallback() {
