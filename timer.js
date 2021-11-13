@@ -5,6 +5,10 @@
  * The date is set via calculateTime(date).
  */
 class Timer extends HTMLElement {
+    /**
+     * Create a new Timer element and initialize
+     * styles and data.
+     */
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -15,15 +19,18 @@ class Timer extends HTMLElement {
         this.create("seconds");
         this.style();
     }
+
     style() {
         const style = document.createElement('style');
-        // TODO here we need to improve the referencing
-        // and make it customizable 
         style.innerHTML = `
             @import url("style.css");
-        `
-        this.shadowRoot.appendChild(style)
+        `;
+        this.shadowRoot.appendChild(style);
     }
+
+    /**
+     * Creates the deadline element
+     */
     createDeadline() {
         const classname = "deadline";
         this.deadline = document.createElement('div');
@@ -31,18 +38,30 @@ class Timer extends HTMLElement {
         this.shadowRoot.appendChild(this.deadline);
         return this.deadline;
     }
+
+    /**
+     * Creates a time element: days, hours, minues, seconds
+     * and attaches it to the root element of this Timer.
+     */
     create(classname) {
         const heading = document.createElement('h4');
         heading.setAttribute("class", classname);
 
         const span = document.createElement('span');
-        span.innerHTML = classname;
+        span.innerHTML = ` ${classname} `;
 
-        const parent = document.createElement('div');
+        const parent = document.createElement('span');
         parent.appendChild(heading);
         parent.appendChild(span);
         this.deadline.appendChild(parent);
     }
+
+    /**
+     * Set's the given *value* time to the given *type*.
+     * *type* represents the hours, minutes, days, seconds
+     * and is rendered into the respective element on this
+     * timer.
+     */
     renderTime(type, value) {
         function format(item) {
             if(item < 10) {
@@ -53,13 +72,21 @@ class Timer extends HTMLElement {
         const item = this.shadowRoot.querySelector(`.deadline .${type}`)
         item.innerHTML = format(value);
     }
+
+    /**
+     * Calculates the time left from the current time until the
+     * the deadline. The dedline is configured in parameters
+     * *futureTime*.
+     * After calculating the time, the element is re-rendered
+     * as well.
+     */
     calculateTime(futureTime) {
         const today = new Date().getTime();
         const t = futureTime - today;
 
         if(t < 0) {
             clearInterval(this.interval);
-            this.deadline.innerHTML = `<h4 class="">it's over!</h4>`;
+            this.deadline.innerHTML = `<p>it's over!</p>`;
         }
 
         const oneSecond = 1000;
@@ -87,13 +114,11 @@ class Timer extends HTMLElement {
     }
 
     connectedCallback() {
-        // TODO make the future date configurable
         const futureDate = this.readDeadline();
-        const that = this;
         this.interval = setInterval(() => {
-            that.calculateTime(futureDate.getTime());
+            this.calculateTime(futureDate.getTime());
         }, 1000);
-        that.calculateTime(futureDate.getTime());
+        this.calculateTime(futureDate.getTime());
     }
 }
 
